@@ -20,16 +20,9 @@ An exploratory analysis of the data is available [here](https://app.hex.tech/5b2
 A baseline and 4 alternative regression models were trained and tested.  The goal was to find a most parsimonious, best-fitting model that accurately predicted weights.  Parsimony will be important when the model is deployed into the field, as they will allow staff to make minimal observations and generate predictions very quickly. An analysis of the ML experiments, including pre-processing steps, test harness and experiment results are available [here]().
 
 ## Results
-The final model selected included the following features:
-
-* *Station:* Facility to which the load is arriving.
-* *Material:* Dominant material stream arriving in the load.
-* *Vehicle:*  Arriving vehicle type.
-* *Fullness* Fullness of a vehicle, expressed as a percentage between 0 and 1.
-
-Over the two year period April 2021 through March 2023, the MAE of the 277K holdout loads was about .03 tons.  On a total tonnage basis, the model predicted 382,200 tons, in comparison to the 382,000 actual tons in the sample. A consolidated summary presentation of the analysis is available [here](https://www.beautiful.ai/player/-NXNAsMpTJbK0JcUkRhR).
+The final model was able to accurately predict load weight.  The Mean Absolute Error (MAE) of the 277K holdout loads was about .03 tons.  On a total tonnage basis, the model predicted 382,200 tons, in comparison to the 382,000 actual tons in the sample. A consolidated summary presentation of the analysis is available [here](https://www.beautiful.ai/player/-NXNAsMpTJbK0JcUkRhR).
 
 ## Value Proposition
-ABC can deploy and immediately rely on the model to predict weights and collect fees reliably and accurately, saving ABC and its customers significant costs during scale outages or downtime, over guessing.  ABC's transfer stations receive over 1,200 customers and 1,800 tons of material every day, which translates to well over $120,000 in revenue per day.  If a scale goes down for a single day, and ABC assigns weights arbitrarily or through guesswork, signifcant opportunity costs are at stake.  These include forgone revenue   
+ABC can deploy and immediately rely on the model to predict weights and collect fees reliably and accurately, saving ABC and its customers significant costs during scale outages, over guessing.  ABC's transfer stations receive over 1,200 customers and 1,800 tons of material every day, which translates to well over $120,000 in revenue per day.  If a scale goes down for a single day, and ABC assigns weights arbitrarily or through guesswork, signifcant opportunity costs are at stake.  These include forgone revenue for ABC if weights are under-assigned, and sigificant costs for customers if over-assigned.  This model can predict weight to within .03, and represents an immediate value-add to ABCs operational assets.   
  
 
