@@ -1,15 +1,16 @@
 schemaVersion: 3
 meta:
-  sourceVersionId: a523e2da-7e60-4a14-97e6-d3b4b9429c25 # DO NOT CHANGE - Hex uses this to match up project versions when reimporting the file
-  description: "This notebook details the results of machine learning experiments that aim to find a model that accurately predicts the weights of loads at Metro transfer stations.  "
-  projectId: 3f5c7f28-f15d-459a-8999-b1f779103515 # DO NOT CHANGE - Unique ID of the project from which this file was generated
+  sourceVersionId: f54ad8eb-9b99-425c-a13c-e7041d529ef5 # DO NOT CHANGE - Hex uses this to match up project versions when reimporting the file
+  description: "This notebook details the results of machine learning experiments that aim to find a model that accurately predicts the weights of loads at ABC Waste's transfer stations.  "
+  projectId: 8bb9151f-544b-4835-a0d5-33db99261a95 # DO NOT CHANGE - Unique ID of the project from which this file was generated
   title: Load Weight Prediction - ML Experiments
   timezone: null
   appTheme: LIGHT
   codeLanguage: PYTHON
   status:
     name: Production
-  categories: []
+  categories:
+    - name: Public
   castDecimalsDefault: true
   logicQueryCacheTimeout: null
   publishedQueryCacheTimeout: null
@@ -42,7 +43,7 @@ cells:
         * *Vehicle:*  Information about the arriving vehicle, including it's type or truck number (if known).
         * *Fullness* The fullness of a vehicle arriving at Station s with Material m, relative to it's historical max for s and m over the data duration, expressed as a percentage with two decimal precision (i.e. scale of 1 to 100).
 
-        These features were derived from [an exploratory data analysis](https://app.hex.tech/54be54bd-cccc-4888-804c-cdb2c24bc75d/hex/dd01deda-2a53-4694-933f-63119b539ca5/draft/logic) of over 4 million transactions at the stations.  For the basline, 18 distinct regressors were trained and the best-fitting model was selected in terms of the lowest Mean Absolute Error (MAE).<br><br>
+        These features were derived from [an exploratory data analysis](https://app.hex.tech/5b266aaf-b343-4ae7-bdea-218e8fe3001f/app/ebbe87e0-62ac-4086-b362-3a2fada84f9b/latest) of over 4 million transactions at the stations.  For the baseline, 18 distinct regressors were trained and the best-fitting model was selected in terms of the lowest Mean Absolute Error (MAE).<br><br>
 
         **2. No Datetime:** This experiment tests the importance of the date and time features by dropping the [TimeStamp] column prior to model training, ceteris paribus.<br><br>
 
@@ -50,7 +51,7 @@ cells:
 
         **4. No Datetime And No Truck Number:** This experiment drops the [TimeStamp] column AND re-engineers the [Vehicle] column by excluding truck numbers, ceteris paribus.<br><br>
 
-        **5. No Fullness:** This experiment tests the important of the fullness feature by dropping the [Fullness] column, ceteris paribus.
+        **5. No Fullness:** This experiment tests the importance of the fullness feature by dropping the [Fullness] column, ceteris paribus.
 
         ### Data Preprocessing
         To facilitate ML model training within the compute resources available, data was truncated to the last 2 years of transactions (April 1, 2021 through March 31, 2023).  This resulted in a dataset of about 923K records.  Data was pre-processed by imputing missing values, using a mean imputer for numeric columns (Tons, Fullness), and a mode imputer for categorical columns (Station, Material, and Vehicle).  Categorical columns were encoded using one-hot encoding, and the Tons target was normalized using a z-score method given its highly skewed distribution.
@@ -270,6 +271,7 @@ cells:
                 colorOrder: ascending
                 color:
                   type: static
+                  color: "#929294"
                 opacity:
                   type: static
                   value: 1
@@ -302,34 +304,18 @@ cells:
     cellLabel: null
     config:
       source: The **holdout MAE was {{baseline_holdout}}**.  The model created very good predictions with residuals that were normally distributed.
-  - cellType: TEXT
-    cellId: 8fecfa24-c7ff-4bf5-b026-57e4547030f0 # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
+  - cellType: MARKDOWN
+    cellId: 82fcb7cb-81e1-496a-8f7a-03b6e51a01fc # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
+    cellLabel: Prediction Error - Exp 1
+    config:
+      source: |
+        <img src="/api/v1/file/66362e28-ba89-4ec1-9985-39ca53f04709" width="400"  />
+  - cellType: MARKDOWN
+    cellId: 1c7345a8-9465-41d6-a41e-4d2521973ac3 # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
     cellLabel: null
     config:
-      richText:
-        - type: paragraph
-          children:
-            - text: ""
-            - src: /api/v1/file/258e81d2-9108-4c74-892a-ade659cf3265
-              type: image
-              width: 410
-              children:
-                - text: ""
-            - text: ""
-  - cellType: TEXT
-    cellId: 4d7e0c2e-a8e1-4cdf-b742-e6f1c54acab0 # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
-    cellLabel: null
-    config:
-      richText:
-        - type: paragraph
-          children:
-            - text: ""
-            - src: /api/v1/file/e7b91cec-8856-4f66-bf4b-85d96b0a11a9
-              type: image
-              width: 600
-              children:
-                - text: ""
-            - text: ""
+      source: |
+        <img src="/api/v1/file/29219ab7-9238-483d-92df-c62241fbab34" width="600"  />
   - cellType: SQL
     cellId: f28340cd-3655-410d-af89-757291760fee # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
     cellLabel: SecondLastMAE
@@ -441,6 +427,7 @@ cells:
                 colorOrder: ascending
                 color:
                   type: static
+                  color: "#929294"
                 opacity:
                   type: static
                   value: 1
@@ -472,34 +459,18 @@ cells:
     cellLabel: null
     config:
       source: The **holdout MAE was {{noDT_holdout}}**.  The model created very good predictions with residuals that were normally distributed.
-  - cellType: TEXT
-    cellId: a80ea2d8-0218-4d0b-a0f5-82a7e75ad5a5 # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
+  - cellType: MARKDOWN
+    cellId: 0f105b13-4d50-407e-81b5-b613173b78fd # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
     cellLabel: null
     config:
-      richText:
-        - type: paragraph
-          children:
-            - text: ""
-            - src: /api/v1/file/dcf48fee-c401-4aff-a220-54653d7cc151
-              type: image
-              width: 374
-              children:
-                - text: ""
-            - text: ""
-  - cellType: TEXT
-    cellId: 228d48b2-ebd3-40dc-b6df-9627c0ceeaa3 # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
+      source: |
+        <img src="/api/v1/file/569ccece-4191-4bf7-b9fd-088027bd6fa4" width="400"  />
+  - cellType: MARKDOWN
+    cellId: b6a374bd-4dfb-4e2b-9f1f-f87fded3ec8f # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
     cellLabel: null
     config:
-      richText:
-        - type: paragraph
-          children:
-            - text: ""
-            - src: /api/v1/file/70fb4d2e-d636-4c67-8c43-cf922bb69ff8
-              type: image
-              width: 600
-              children:
-                - text: ""
-            - text: ""
+      source: |
+        <img src="/api/v1/file/9e5e224a-3128-43db-a83f-bd20091105b3" width="600"  />
   - cellType: SQL
     cellId: 9831f1fb-93fa-4b82-bcfd-0a5ad8b0d292 # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
     cellLabel: SecondLastMAEs
@@ -613,6 +584,7 @@ cells:
                 colorOrder: ascending
                 color:
                   type: static
+                  color: "#929294"
                 opacity:
                   type: static
                   value: 1
@@ -644,34 +616,18 @@ cells:
     cellLabel: Holdout MAE
     config:
       source: The **holdout MAE was {{noTN_holdout}}**.  The model created very good predictions with residuals that were normally distributed.
-  - cellType: TEXT
-    cellId: 3a53f240-03b4-47be-9a60-f1d113e26ef3 # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
+  - cellType: MARKDOWN
+    cellId: b75c806b-7a37-46db-8db3-ad9ecd9c584c # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
     cellLabel: null
     config:
-      richText:
-        - type: paragraph
-          children:
-            - text: ""
-            - src: /api/v1/file/2b3b3199-ab66-4b5c-8286-f2c611b922bc
-              type: image
-              width: 370
-              children:
-                - text: ""
-            - text: ""
-  - cellType: TEXT
-    cellId: b985e91d-2ce2-4136-aefa-21dfbac1af2a # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
+      source: |
+        <img src="/api/v1/file/54b9b47c-aca6-4163-9187-f728f7a9df81" width="400"  />
+  - cellType: MARKDOWN
+    cellId: db69d41b-ce31-4fd3-801b-e8281e59aea8 # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
     cellLabel: null
     config:
-      richText:
-        - type: paragraph
-          children:
-            - text: ""
-            - src: /api/v1/file/31e455ac-6287-4c0b-94cc-c90441985d28
-              type: image
-              width: 600
-              children:
-                - text: ""
-            - text: ""
+      source: |
+        <img src="/api/v1/file/c38e4241-5821-4129-b235-46c960fb8a9c" width="600"  />
   - cellType: SQL
     cellId: 93327db9-6fa8-4a5d-a058-0b1f54329b55 # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
     cellLabel: Nodt notn cvscores
@@ -785,6 +741,7 @@ cells:
                 colorOrder: ascending
                 color:
                   type: static
+                  color: "#929294"
                 opacity:
                   type: static
                   value: 1
@@ -816,34 +773,18 @@ cells:
     cellLabel: null
     config:
       source: The **holdout MAE was {{noDT_noTN_holdout}}**.  The model created very good predictions with residuals that were normally distributed.
-  - cellType: TEXT
-    cellId: 6f35373a-3a85-4eef-b7c5-2c9d78f15b5d # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
+  - cellType: MARKDOWN
+    cellId: de2a0a70-bd88-4084-b03c-98c6009e2c35 # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
     cellLabel: null
     config:
-      richText:
-        - type: paragraph
-          children:
-            - text: ""
-            - src: /api/v1/file/e5bed3c3-19b9-4f59-9558-f792549d664e
-              type: image
-              width: 387
-              children:
-                - text: ""
-            - text: ""
-  - cellType: TEXT
-    cellId: c5372b3f-e47c-4b33-b7b5-9e04bfef1925 # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
+      source: |
+        <img src="/api/v1/file/1219023f-59dd-4139-aecd-15ca343250f7" width="400"  />
+  - cellType: MARKDOWN
+    cellId: 69d76908-c7ad-4664-ab8d-ce1b688432eb # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
     cellLabel: null
     config:
-      richText:
-        - type: paragraph
-          children:
-            - text: ""
-            - src: /api/v1/file/1dba9624-bff6-4530-a537-b783f90401b1
-              type: image
-              width: 600
-              children:
-                - text: ""
-            - text: ""
+      source: |
+        <img src="/api/v1/file/af7ed358-5534-4006-aad8-b771489c0dc9" width="600"  />
   - cellType: SQL
     cellId: 9c5f1482-ae84-425b-a324-6f6979805b81 # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
     cellLabel: Nofull cvscores
@@ -956,6 +897,7 @@ cells:
                 colorOrder: ascending
                 color:
                   type: static
+                  color: "#929294"
                 opacity:
                   type: static
                   value: 1
@@ -987,34 +929,18 @@ cells:
     cellLabel: null
     config:
       source: The **holdout MAE was {{noFull_holdout}}**.  While the residuals were normally distributed, the error in the model's predictions increased significantly.
-  - cellType: TEXT
-    cellId: d8f2ecf4-eef0-4f87-a0c5-d03359daca73 # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
+  - cellType: MARKDOWN
+    cellId: 8cdc10c3-52bd-4656-9fea-db9f61fcdc8f # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
     cellLabel: null
     config:
-      richText:
-        - type: paragraph
-          children:
-            - text: ""
-            - src: /api/v1/file/7c4c9c1c-422c-43fe-8e82-7ff4adf638d6
-              type: image
-              width: 370
-              children:
-                - text: ""
-            - text: ""
-  - cellType: TEXT
-    cellId: 6137fb14-b8ab-42ca-b5e6-736526c56273 # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
+      source: |
+        <img src="/api/v1/file/705ab9ae-5911-4eb0-b4ca-8598be441a16" width="400"  />
+  - cellType: MARKDOWN
+    cellId: 7c6c5fcf-3007-46ba-b431-6c38ac904c63 # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
     cellLabel: null
     config:
-      richText:
-        - type: paragraph
-          children:
-            - text: ""
-            - src: /api/v1/file/45a211f3-0f3d-433b-859d-81ec2743a35c
-              type: image
-              width: 600
-              children:
-                - text: ""
-            - text: ""
+      source: |
+        <img src="/api/v1/file/2dfc1881-8a63-47e5-87c7-d09a094c831a" width="600"  />
   - cellType: MARKDOWN
     cellId: edab7fc5-f900-4181-a9df-4a284f515872 # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
     cellLabel: null
@@ -1240,6 +1166,7 @@ cells:
                 colorOrder: ascending
                 color:
                   type: static
+                  color: "#929294"
                 opacity:
                   type: static
                   value: 1
@@ -1345,6 +1272,7 @@ cells:
                 colorOrder: ascending
                 color:
                   type: static
+                  color: "#929294"
                 opacity:
                   type: static
                   value: 1
@@ -1443,6 +1371,7 @@ cells:
                 colorOrder: ascending
                 color:
                   type: static
+                  color: "#929294"
                 opacity:
                   type: static
                   value: 1
@@ -1475,7 +1404,7 @@ cells:
     config:
       source: |-
         #### Across Categoricals
-        The MAE across combinations of station, material and vehicle features varied significantly.  The combination with the lowest error (with more than 30 samples) was wood loads entering Metro Central in a Standard Pickup (MAE = .001).  The combination with the highest error (with more than 30 samples) was MSW loads entering Metro Central in Tankers (MAE = .234).   
+        The MAE across combinations of station, material and vehicle features varied significantly.  The combination with the lowest error (with more than 30 samples) was wood loads entering ABC 1 in a Standard Pickup (MAE = .001).  The combination with the highest error (with more than 30 samples) was MSW loads entering ABC 1 in Tankers (MAE = .234).   
   - cellType: SQL
     cellId: 7ef22b89-adfb-4438-887b-31e71b466837 # DO NOT CHANGE - Hex uses this to match up cells when reimporting the file, and detect any changes to existing cells
     cellLabel: Allcatfeatures
@@ -1621,9 +1550,9 @@ appLayout:
                 - showSource: false
                   hideOutput: false
                   type: CELL
-                  cellId: c34ac86e-3de1-4fc0-bf24-f64062dfb593
+                  cellId: d2b3c3db-2c73-4436-bae3-78f514158e71
                   sharedFilterId: null
-                  height: 360
+                  height: null
                   showLabel: true
         - columns:
             - start: 0
@@ -1632,9 +1561,9 @@ appLayout:
                 - showSource: false
                   hideOutput: false
                   type: CELL
-                  cellId: d2b3c3db-2c73-4436-bae3-78f514158e71
+                  cellId: c34ac86e-3de1-4fc0-bf24-f64062dfb593
                   sharedFilterId: null
-                  height: null
+                  height: 360
                   showLabel: true
         - columns:
             - start: 0
@@ -1649,22 +1578,22 @@ appLayout:
                   showLabel: true
         - columns:
             - start: 0
-              end: 51
+              end: 60
               elements:
                 - showSource: false
                   hideOutput: false
                   type: CELL
-                  cellId: 8fecfa24-c7ff-4bf5-b026-57e4547030f0
+                  cellId: 82fcb7cb-81e1-496a-8f7a-03b6e51a01fc
                   sharedFilterId: null
-                  height: null
-                  showLabel: true
-            - start: 54
+                  height: 500
+                  showLabel: false
+            - start: 60
               end: 120
               elements:
                 - showSource: false
                   hideOutput: false
                   type: CELL
-                  cellId: 4d7e0c2e-a8e1-4cdf-b742-e6f1c54acab0
+                  cellId: 1c7345a8-9465-41d6-a41e-4d2521973ac3
                   sharedFilterId: null
                   height: null
                   showLabel: true
@@ -1703,22 +1632,22 @@ appLayout:
                   showLabel: true
         - columns:
             - start: 0
-              end: 51
+              end: 60
               elements:
                 - showSource: false
                   hideOutput: false
                   type: CELL
-                  cellId: a80ea2d8-0218-4d0b-a0f5-82a7e75ad5a5
+                  cellId: 0f105b13-4d50-407e-81b5-b613173b78fd
                   sharedFilterId: null
                   height: null
                   showLabel: true
-            - start: 54
+            - start: 60
               end: 120
               elements:
                 - showSource: false
                   hideOutput: false
                   type: CELL
-                  cellId: 228d48b2-ebd3-40dc-b6df-9627c0ceeaa3
+                  cellId: b6a374bd-4dfb-4e2b-9f1f-f87fded3ec8f
                   sharedFilterId: null
                   height: null
                   showLabel: true
@@ -1757,22 +1686,22 @@ appLayout:
                   showLabel: false
         - columns:
             - start: 0
-              end: 54
+              end: 60
               elements:
                 - showSource: false
                   hideOutput: false
                   type: CELL
-                  cellId: 3a53f240-03b4-47be-9a60-f1d113e26ef3
+                  cellId: b75c806b-7a37-46db-8db3-ad9ecd9c584c
                   sharedFilterId: null
                   height: null
                   showLabel: true
-            - start: 54
+            - start: 60
               end: 120
               elements:
                 - showSource: false
                   hideOutput: false
                   type: CELL
-                  cellId: b985e91d-2ce2-4136-aefa-21dfbac1af2a
+                  cellId: db69d41b-ce31-4fd3-801b-e8281e59aea8
                   sharedFilterId: null
                   height: null
                   showLabel: true
@@ -1811,22 +1740,22 @@ appLayout:
                   showLabel: true
         - columns:
             - start: 0
-              end: 54
+              end: 60
               elements:
                 - showSource: false
                   hideOutput: false
                   type: CELL
-                  cellId: 6f35373a-3a85-4eef-b7c5-2c9d78f15b5d
+                  cellId: de2a0a70-bd88-4084-b03c-98c6009e2c35
                   sharedFilterId: null
                   height: null
                   showLabel: true
-            - start: 57
+            - start: 60
               end: 120
               elements:
                 - showSource: false
                   hideOutput: false
                   type: CELL
-                  cellId: c5372b3f-e47c-4b33-b7b5-9e04bfef1925
+                  cellId: 69d76908-c7ad-4664-ab8d-ce1b688432eb
                   sharedFilterId: null
                   height: null
                   showLabel: true
@@ -1865,22 +1794,22 @@ appLayout:
                   showLabel: true
         - columns:
             - start: 0
-              end: 57
+              end: 60
               elements:
                 - showSource: false
                   hideOutput: false
                   type: CELL
-                  cellId: d8f2ecf4-eef0-4f87-a0c5-d03359daca73
+                  cellId: 8cdc10c3-52bd-4656-9fea-db9f61fcdc8f
                   sharedFilterId: null
                   height: null
                   showLabel: true
-            - start: 57
+            - start: 60
               end: 120
               elements:
                 - showSource: false
                   hideOutput: false
                   type: CELL
-                  cellId: 6137fb14-b8ab-42ca-b5e6-736526c56273
+                  cellId: 7c6c5fcf-3007-46ba-b431-6c38ac904c63
                   sharedFilterId: null
                   height: null
                   showLabel: true

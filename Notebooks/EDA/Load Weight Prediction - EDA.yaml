@@ -1,15 +1,16 @@
 schemaVersion: 3
 meta:
-  sourceVersionId: 4436c8f9-cca6-4ce4-ac87-bc1ff089ad5d # DO NOT CHANGE - Hex uses this to match up project versions when reimporting the file
+  sourceVersionId: 1f244fcf-13ce-4aff-86d5-94f224f51dcc # DO NOT CHANGE - Hex uses this to match up project versions when reimporting the file
   description: This notebook provides an exploratory data analysis of incoming transaction weights at ABC Waste's stations. This analysis will inform the development of a model and mobile software application that can be used by staff to predict incoming load weights based on readily observable features of the load when scales are not available to record the weight.
-  projectId: dd01deda-2a53-4694-933f-63119b539ca5 # DO NOT CHANGE - Unique ID of the project from which this file was generated
+  projectId: ebbe87e0-62ac-4086-b362-3a2fada84f9b # DO NOT CHANGE - Unique ID of the project from which this file was generated
   title: Load Weight Prediction - EDA
   timezone: null
   appTheme: SYS_PREF
   codeLanguage: PYTHON
   status:
     name: Production
-  categories: []
+  categories:
+    - name: Public
   castDecimalsDefault: true
   logicQueryCacheTimeout: null
   publishedQueryCacheTimeout: null
@@ -572,8 +573,8 @@ cells:
           selectionEnabled: false
       chartSelection: {}
       colorMappings:
-        ABC 1: "#4C78A8"
-        ABC 2: "#F58518"
+        ABC 1: "#E7446F"
+        ABC 2: "#1B1718"
         Metro South: "#9CA3B4"
         Metro Central: "#CFD3DE"
       resultVariable: filter_result_2
